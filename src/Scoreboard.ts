@@ -45,11 +45,12 @@ class ScoreBoard {
             const aMatchTotalScore = a.homeScore + a.awayScore;
             const bMatchTotalScore = b.homeScore + b.awayScore;
 
-            return bMatchTotalScore === aMatchTotalScore
-                ? b.startTime.getTime() - a.startTime.getTime()
-                : bMatchTotalScore - aMatchTotalScore
+            if (bMatchTotalScore !== aMatchTotalScore) {
+                return bMatchTotalScore - aMatchTotalScore;
             }
-        )
+
+            return b.startTime.getTime() - a.startTime.getTime();
+        })
         .map(({homeTeam, awayTeam, homeScore, awayScore}, index) => 
             `${index + 1}. ${homeTeam} ${homeScore} - ${awayScore} ${awayTeam}`);
     }
